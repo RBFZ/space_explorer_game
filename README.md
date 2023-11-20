@@ -1,7 +1,7 @@
 Space Odyssey Project
 
 Description
-This is a simple C++ project named "Space Odyssey". The main goal of this project is to simulate a space game where a player controls spaceship that navigates to different planets to go through different challenges. Players run into dragons, experience difficult environments, but by overcoming these hardships, they are able to gain rewards and XP.
+This is a simple C++ project named "Space Odyssey". The main goal of this project is to simulate a space game where a player controls a spaceship that navigates to different planets to go through different challenges. Players run into dragons, experience difficult environments, but by overcoming these hardships, they are able to gain rewards and XP.
 
 Files
 The project consists of the following files:
