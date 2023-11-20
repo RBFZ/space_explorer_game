@@ -15,9 +15,11 @@ DesertExplorationEvent::DesertExplorationEvent() : ExplorationEvent() {
 }
 
 void DesertExplorationEvent::explore() {
-    cout << "Your Spaceship arrives at the desolate desert planet...\n";
+    desertLanded = true;
+    cout << "Your Spaceship lands on the dry and desolate planet...\n";
     cin.ignore();
-    cout << "As your Crew decides where to embark to first, they come up with two options:" << endl;
+    cout << endl;
+    cout << "As your Crew decides where to journey to first, they come up with two options:" << endl;
     cin.ignore();
     cout << "1. Search for an oasis (chance of XP Gain, or risk of dehydration)\n";
     cout << "2. Keep walking in hopes of finding something(risk of losing Crew members)\n";
@@ -54,9 +56,9 @@ void DesertExplorationEvent::explore() {
             cout << "Unfortunately, after many hours of searching, your Crew did not find an oasis. One of your Crew members has fainted due to dehydration.\n";
             // Decrease crew capacity by 1
             cin.ignore();
+            cout << endl;
             cout << "Because of this, the rest of your Crew decided to head back to the ship and quickly provide aid.\n";
             cin.ignore();
-            cout << endl;
             cout << "As your Crew arrived back at the ship, they discovered that the Crew member's state was severe...";
             cin.ignore();
             cout << "The Crew treated them to the best of their abilities, and...";
@@ -67,6 +69,7 @@ void DesertExplorationEvent::explore() {
                 cout << "They survived! Your Crew member has recovered and is ready to continue the journey.\n";
                 cout << "(+10 XP)";
                 cin.ignore();
+                cout << endl;
             } 
             else if (DsurvivalChance == 0){
                 cout << "Sadly, despite your Crew's best efforts, the Crew member did not survive...\n";
@@ -93,7 +96,9 @@ void DesertExplorationEvent::explore() {
         else {
             cout << "As the Crew had managed to find your spaceship, they were about to depart.\nBut suddenly, even in this dangerous sandstorm, they spotted a large figure with wings...\n"; //dragon event
             cin.ignore();
-            cout << "Your Crew stood there motionless inside the ship, unable to beleive their eyes. It was a Desert Dragon!\n";
+            cout << "Your Crew stood there motionless inside the ship, unable to beleive their eyes...\n";
+            cin.ignore();
+            cout << "It was a Desert Dragon!\n";
             cin.ignore();
             dragonDesert = true;
             cout << endl;
@@ -113,6 +118,7 @@ BlizzardExplorationEvent::BlizzardExplorationEvent() : ExplorationEvent() {
 }
 
 void BlizzardExplorationEvent::explore() {
+    iceLanded = true;
     cout << "A fierce blizzard begins!\n";
     cout << "Options:\n";
     cout << "1. Seek shelter (chance of success)\n";
@@ -126,6 +132,7 @@ VolcanoEruptionExplorationEvent::VolcanoEruptionExplorationEvent() : Exploration
 }
 
 void VolcanoEruptionExplorationEvent::explore() {
+    lavaLanded = true;
     cout << "A volcano erupts on the lava planet!\n";
     cout << "Options:\n";
     cout << "1. Evacuate to a safe location (chance of success)\n";

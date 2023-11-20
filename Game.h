@@ -3,9 +3,7 @@
 
 #include <vector>
 #include <iostream>
-#include "Spaceship.h"
 #include "Planets.h"
-#include "Player.h"
 #include "DragonEvent.h"
 
 class Game {

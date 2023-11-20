@@ -15,6 +15,7 @@ public:
 
 class DesertExplorationEvent : public ExplorationEvent {
 private:
+    bool desertLanded;
     bool dragonDesert;
     int desertChoice;
     bool desertXpGain;
@@ -35,6 +36,10 @@ public:
     bool getXpGain() {
         return desertXpGain;
     }
+    bool getDesertLanded() {
+        return desertLanded;
+    }
+    
     int getCrewChance() {
         return DesertCrewChance;
     }
@@ -53,6 +58,7 @@ public:
 class BlizzardExplorationEvent : public ExplorationEvent {
 private:
     bool dragonIce;
+    bool iceLanded;
     int blizzardChoice;
     bool blizzardXpGain;
     int IceCrewChance;
@@ -72,11 +78,16 @@ public:
     int getCrewChance() {
         return IceCrewChance;
     }
+    bool getIceLanded() {
+        return iceLanded;
+    }
+    
 };
 
 class VolcanoEruptionExplorationEvent : public ExplorationEvent {
 private:
     bool dragonLava;
+    bool lavaLanded;
     int volcanoChoice;
     bool volcanoXpGain;
     int LavaCrewChance;
@@ -96,6 +107,10 @@ public:
     int getCrewChance() {
         return LavaCrewChance;
     }
+    bool getLavaLanded() {
+        return lavaLanded;
+    }
+    
     // Additional methods or properties specific to VolcanoEruptionExplorationEvent
 };
 

@@ -1,5 +1,9 @@
 #ifndef RANDOMEVENT_H
 #define RANDOMEVENT_H
+#include <iostream>
+
+using namespace std;
+
 
 class RandomEvent {
 public:

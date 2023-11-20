@@ -27,7 +27,7 @@ void Planet::displayInfo() {
 void Planet::explorePlanet() {
     cout << "You have chosen the " << name << "...\n";
     cout << endl;
-    cout << "Brief Summary Report on Planet of Interest (POI):\n";
+    cout << "Summary Report on Planet of Interest:\n";
     cout << endl;
     
     // Display planet information
@@ -36,13 +36,27 @@ void Planet::explorePlanet() {
     // Execute the exploration event
     if (explorationEvent != nullptr) {
         explorationEvent->explore();
-    }
-    
-    
+    }   
 }
 
-bool Planet::isVisited() const {
-    return visited;
+bool Planet::DesertisVisited() const {
+    if (name == "Desert Planet") {
+        return true;
+    }
+    return DesertVisited;
+}
+bool Planet::IceisVisited() const {
+    if (name == "Ice Planet") {
+        return true;
+    }
+    return IceVisited;
+}
+
+bool Planet::LavaisVisited() const {
+    if (name == "Lava Planet") {
+        return true;
+    }
+    return LavaVisited;
 }
 
 int Planet::getFuelRequired() const { return fuel_required; }

@@ -7,7 +7,9 @@ using namespace std;
 
 class Planet {
 private:
-    bool visited;
+    bool DesertVisited;
+    bool IceVisited;
+    bool LavaVisited;
     int fuelCapacity;
     string name;
     string description;
@@ -28,5 +30,7 @@ public:
 
     void displayInfo();
     void explorePlanet();
-    bool isVisited() const;
+    bool DesertisVisited() const;
+    bool IceisVisited() const;
+    bool LavaisVisited() const;
 };

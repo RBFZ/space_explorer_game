@@ -1,5 +1,4 @@
 #include "DragonEvent.h"
-#include "Spaceship.h"
 #include <iostream>
 
 using namespace std;
@@ -28,8 +27,10 @@ void DragonMonsterRandomEvent::executeEvent() {
             cout << "You now have 30 more fuel capacity to zoom around even faster!\n";
         } 
         else {
-            cout << "You failed to defeat the dragon. The spaceship is destroyed, and you perish.\n";
+            cout << "As your ship flew threw the air, the sandstorm had blinded your view and miscalculated your aim. The might Desert Dragon had gotten close enough to engulf your spaceship in flames...\n";
             // Implement game over logic here
+            cout << endl;
+            cout << "This may have not been your desired outcome, but you can always try again!\nThanks for Playing! " << endl;
             this->dragonOutcome = false;
             //end game
         }

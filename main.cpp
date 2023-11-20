@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include "Game.h"  // Assuming the Game class contains the necessary functionality
-#include "Spaceship.h"  // Include the Spaceship class
 
 using namespace std;
 
