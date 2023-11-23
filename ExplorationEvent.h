@@ -4,6 +4,7 @@
 #include <vector>
 #include "Spaceship.h"
 #include "Player.h"
+#include "DragonEvent.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ private:
     bool desertXpGain;
     int DesertCrewChance;
     int OasisChance;
-    int desertrandomChance;
+    int desertDragonChance;
     int DsurvivalChance;
 
 public:
@@ -46,8 +47,8 @@ public:
     int getOasisChance() {
         return OasisChance;
     }
-    int getDesertRandomChance() {
-        return desertrandomChance;
+    int getdesertDragonChance() {
+        return desertDragonChance;
     }
     int getDsurvivalChance() {
         return DsurvivalChance;
@@ -57,55 +58,71 @@ public:
 
 class BlizzardExplorationEvent : public ExplorationEvent {
 private:
-    bool dragonIce;
     bool iceLanded;
-    int blizzardChoice;
-    bool blizzardXpGain;
-    int IceCrewChance;
-    //int CaveChance
+    bool dragonIce;
+    int iceChoice;
+    bool iceXpGain;
+    int IceShipChance;
+    int CaveChance;
+    int iceDragonChance;
+    int IsurvivalChance;
 public:
     BlizzardExplorationEvent();
     virtual void explore() override;
     bool getDragonIce() {
         return dragonIce;
     }
-    int getBlizzardChoice() {
-        return blizzardChoice;
+    int getIceChoice() {
+        return iceChoice;
     }
     bool getXpGain() {
-        return blizzardXpGain;
+        return iceXpGain;
     }
-    int getCrewChance() {
-        return IceCrewChance;
+    int getShipChance() {
+        return IceShipChance;
     }
     bool getIceLanded() {
         return iceLanded;
     }
+    int getCaveChance() {
+        return CaveChance;
+    }
     
 };
 
-class VolcanoEruptionExplorationEvent : public ExplorationEvent {
+class VolcanoExplorationEvent : public ExplorationEvent {
 private:
-    bool dragonLava;
     bool lavaLanded;
-    int volcanoChoice;
-    bool volcanoXpGain;
-    int LavaCrewChance;
-    //OasisChance
+    bool dragonLava;
+    int lavaChoice;
+    bool lavaXpGain;
+    int LavaGoldChance;
+    int HotSpringChance;
+    int lavaDragonChance;
+    int LsurvivalChance;
 public:
-    VolcanoEruptionExplorationEvent();
+    VolcanoExplorationEvent();
     virtual void explore() override;
     bool getDragonLava() {
         return dragonLava;
     }
-    int getVolcanoChoice() {
-        return volcanoChoice;
+    int getLavaChoice() {
+        return lavaChoice;
     }
-    bool getXpGain() {
-        return volcanoXpGain;
+    bool getLavaXpGain() {
+        return lavaXpGain;
     }
-    int getCrewChance() {
-        return LavaCrewChance;
+    int getLavaGoldChance() {
+        return LavaGoldChance;
+    }
+    int getHotSpringChance() {
+        return HotSpringChance;
+    }
+    int getLavaDragonChance() {
+        return lavaDragonChance;
+    }
+    int getLsurvivalChance() {
+        return LsurvivalChance;
     }
     bool getLavaLanded() {
         return lavaLanded;

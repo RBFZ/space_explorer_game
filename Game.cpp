@@ -26,7 +26,7 @@ void Game::startGame() {
     // Initialize the game, set up planets dynamically
     Planet* desertPlanet = new Planet("Desert Planet", "A hot and arid desert world.", 30, 2, new DesertExplorationEvent());
     Planet* icePlanet = new Planet("Ice Planet", "A frozen ice-covered planet.", 40, 3, new BlizzardExplorationEvent());
-    Planet* lavaPlanet = new Planet("Lava Planet", "A planet with rivers of molten lava.", 35, 4, new VolcanoEruptionExplorationEvent());
+    Planet* lavaPlanet = new Planet("Lava Planet", "A planet with rivers of molten lava.", 35, 4, new VolcanoExplorationEvent());
 
     // Add planets to the game
     addPlanet(desertPlanet);
@@ -35,18 +35,40 @@ void Game::startGame() {
 
     // Output selection menu for planets or quit option
     cout << "\nWelcome to Space Odyssey!\n";
+        std::cout <<
+"     / \\\n"
+"    /===\\\n"
+"   |     |\n"
+"  /=======\\\n"
+" |=========|\n"
+" |=========|\n"
+" |=========|\n"
+"  \\=======/\n"
+"   |     |\n"
+"     \\ /\n"
+"     /|\\\n"
+"    / | \\\n"
+"   /  |  \\\n"
+"  /   |   \\\n";
     cout << "In this game, you will explore different planets, each with their own unique challenges.\n";
     cout << "You can gain experience points (XP) by successfully overcoming these challenges.\n";
     cout << "You can also gain or lose crew members based on your decisions.\n";
-    cout << "Your spaceship can be upgraded through valiant efforts!\n";
+    cout << "Your spaceship can also be upgraded through valiant efforts!\n";
     cout << "But beware, there are many dangers lurking in the cosmos...\n";
+    cout << "To win you will need to have explored all planets in the system.\n";
     cout << "Good luck, and may the stars guide your journey!\n";
     cout << endl;
     cout << "<Important Hint: Hit 'Enter' on your keyboard to continue when game dialogue pauses>" << endl;
     cin.ignore();
-    
+    cout << "If you have a savegame and would like to load it, please enter '1', otherwise enter any key.";
+    int loadChoice;
+    cin >> loadChoice;
+    if (loadChoice == 1)
+        loadGame();
+    cout << endl;
     unsigned int choice;
     do {
+        cout << "----------------------------------------" << endl;
         cout << "\nPlease select a planet to explore or quit the game:\n";
         for (int i = 0; i < planets.size(); i++) {
             if (!planets[i]->DesertisVisited()) {
@@ -58,12 +80,12 @@ void Game::startGame() {
             else if (!planets[i]->LavaisVisited()) {
                 cout << i + 1 << ". " << planets[i]->getName() << "\n";
             }
-            
-        } //LAST WORKING ON DESERT VISITED
+        } 
         cout << planets.size() + 1 << ". Refuel with XP\n";
         cout << planets.size() + 2 << ". Quit game\n";
         cout << "Enter your choice: ";
         cin >> choice;
+        cout << "----------------------------------------" << endl;
 
         if (choice > 0 && choice <= planets.size()) {
             currentPlanetIndex = choice - 1;
@@ -95,6 +117,12 @@ void Game::startGame() {
             
         }
         else if (choice == planets.size() + 2) {
+            cout << "Would you like to save your game? (Y/N)";
+            char saveChoice;
+            cin >> saveChoice;
+            if (saveChoice == 'Y' || saveChoice == 'y') {
+                saveGame();
+            }
             endGame();
             return;
         }
@@ -128,54 +156,49 @@ void Game::exploreCurrentPlanet() {
         DesertExplorationEvent* desertEvent = dynamic_cast<DesertExplorationEvent*>(planets[currentPlanetIndex]->getExplorationEvent());
         playerSpaceship->decreaseFuelCapacity(fuelRequired);
         if (desertEvent != nullptr) {
-            if (desertEvent->getDesertLanded() == true) {
-                cout << "<You have " << playerSpaceship->getFuelCapacity() << " units of fuel remaining>\n";
-                cin.ignore();
-                cout << endl;
-            }
-            if (desertEvent->getDesertChoice() == 1) {
-                if (desertEvent->getOasisChance() == 1) {
-                    if (desertEvent->getXpGain()) {
+            if (desertEvent->getDesertChoice() == 1) { //option 1 or 2 when landed
+                if (desertEvent->getOasisChance() == 1) { //found oasis
+                    if (desertEvent->getXpGain()) { 
                         this->player->gainXP(15); //gain xp for finding oasis
                     }
                     if (desertEvent->getCrewChance() == 1) { //found crew member in oasis
                     playerSpaceship->increaseCrewCapacity(1);
                     }
                 }
-                else if (desertEvent->getOasisChance() == 0) {
+                else if (desertEvent->getOasisChance() == 0) { //not found oasis
                     if (desertEvent->getDsurvivalChance() == 1) {
-                        this->player->gainXP(10);
+                        this->player->gainXP(10); //crew member survived dehydration
                     }
                     else if (desertEvent->getDsurvivalChance() == 0) {
-                        playerSpaceship->decreaseCrewCapacity(1); // decrease crew member due to dehydration
+                        playerSpaceship->decreaseCrewCapacity(1); //crew member died of dehydration
                     }
-                }
+                }//displaying stats after leaving planet
                 cout << "----------------------------------------" << endl;
                 cout << "Current Units of Fuel: " << playerSpaceship->getFuelCapacity() << "\n";
                 cout << "Current Crew Number: " << playerSpaceship->getCrewCapacity() << "\n";
                 cout << "Current XP: " << player->getXP() << "\n";
                 cout << "----------------------------------------" << endl;
             }
-            if (desertEvent->getDesertChoice() == 2) {
+            if (desertEvent->getDesertChoice() == 2) { //second choice to keep wandering in desert
                 if (desertEvent->getDragonDesert()) {
                     DragonMonsterRandomEvent dragonEvent;
                     dragonEvent.executeEvent();
-                    if (dragonEvent.getDragonChoice() == 1){
+                    if (dragonEvent.getDragonChoice() == 1){ //dragon shows up 50% chance
                         if (dragonEvent.getDragonOutcome()) {
-                            player->gainXP(20);
-                            playerSpaceship->increaseFuelCapacity(30);
+                            player->gainXP(20); 
+                            playerSpaceship->increaseFuelCapacity(30); //win +20 xp and +30 fuel (jet spaceship)
                         }
-                        else if (!dragonEvent.getDragonOutcome()) {
+                        else if (!dragonEvent.getDragonOutcome()) { //lose=dead game over
                             endGame();
                             return;
                         }
                     }
                     else if(dragonEvent.getDragonChoice() == 2) {
                         if (dragonEvent.getDragonEscape()) {
-                            playerSpaceship->decreaseFuelCapacity(15);
+                            playerSpaceship->decreaseFuelCapacity(15); //run away from dragon -15 fuel
                         }
                     }
-                }
+                }//displaying stats after leaving planet
                 cout << "----------------------------------------" << endl;
                 cout << "Current Units of Fuel: " << playerSpaceship->getFuelCapacity() << "\n";
                 cout << "Current Crew Number: " << playerSpaceship->getCrewCapacity() << "\n";
@@ -184,9 +207,15 @@ void Game::exploreCurrentPlanet() {
             }
         }
     }
-    // Check if the planet being explored is an ice planet //hostile level 3, so more change of loss, bigger reward
+    // Check if the planet being explored is an ice planet //hostile level 3, so more chance of loss, bigger reward
     else if (planets[currentPlanetIndex]->getName() == "Ice Planet") { //out of 2/3 for random chance
-        
+        BlizzardExplorationEvent* iceEvent = dynamic_cast<BlizzardExplorationEvent*>(planets[currentPlanetIndex]->getExplorationEvent());
+        playerSpaceship->decreaseFuelCapacity(fuelRequired);
+        if (iceEvent != nullptr) {
+            if (iceEvent->getIceChoice() == 1) {
+                //ice
+            }
+        }
     }
     // Check if the planet being explored is a lava planet // hostile level 4, even more change of loss, bigger reward
     else if (planets[currentPlanetIndex]->getName() == "Lava Planet") { //3/4 for random chance
@@ -196,7 +225,7 @@ void Game::exploreCurrentPlanet() {
     // Move to the next planet if there are more planets
     //if (function for planet exited = true)
     if (currentPlanetIndex < planets.size() - 1) {
-        cout << "Where are we off to next...\n";
+        cout << "Where to next...\n";
         cin.ignore();
     } else {
         cout << "Congratulations! You have explored all planets.\n";
@@ -227,11 +256,32 @@ void Game::endGame() {
     }
 }
 
+
 void Game::saveGame() {
-    // Save the game state to a file
+    std::ofstream file("savegame.txt");
+    if (file.is_open()) {
+        file << player->getXP() << "\n";
+        file << playerSpaceship->getFuelCapacity() << "\n";
+        file << playerSpaceship->getCrewCapacity() << "\n";
+        file << currentPlanetIndex << "\n";
+        file.close();
+    }
 }
 
 void Game::loadGame() {
-    // Load the game state from a file
+    std::ifstream file("savegame.txt");
+    if (file.is_open()) {
+        int xp, fuel, crew, index;
+        file >> xp;
+        file >> fuel;
+        file >> crew;
+        file >> index;
+        player->setXP(xp);
+        playerSpaceship->setFuelCapacity(fuel);
+        playerSpaceship->setCrewCapacity(crew);
+        currentPlanetIndex = index;
+        file.close();
+    } else {
+        std::cout << "No save game found. Starting a new game.\n";
+    }
 }
-

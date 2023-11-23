@@ -7,27 +7,20 @@ Spaceship::Spaceship(int fuel_capacity, int crew_capacity)
 
 Spaceship::~Spaceship() {}
 
-void Spaceship::fueling(int amount) {
+/*void Spaceship::fueling(int amount) {
     if (amount > 0 && amount <= getFuelCapacity()) {
         fuel_capacity += amount;
     }
-}
+}*/
 
-void Spaceship::journey() {
-    // Implementation
-}
 
-void Spaceship::home() {
-    // Implementation
-}
-
-/*void Spaceship::setFuelCapacity(int fuel_capacity) {
+void Spaceship::setFuelCapacity(int fuel_capacity) {
         this->fuel_capacity = fuel_capacity;
     }
 
 void Spaceship::setCrewCapacity(int crew_capacity) {
         this->crew_capacity = crew_capacity;
-    }*/
+    }
 
 int Spaceship::getFuelCapacity() const {
         return fuel_capacity;

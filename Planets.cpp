@@ -16,7 +16,7 @@ Planet Planet::createIcePlanet() {
 }
 
 Planet Planet::createLavaPlanet() {
-    return Planet("Lava Planet", "A land of rivers full of lava circulating in all directions. This extremely dangerous planet is layered with active volcanoes and blazing magma geysers.", 35, 4, new VolcanoEruptionExplorationEvent());
+    return Planet("Lava Planet", "A land of rivers full of lava circulating in all directions. This extremely dangerous planet is layered with active volcanoes and blazing magma geysers.", 35, 4, new VolcanoExplorationEvent());
 }
 
 void Planet::displayInfo() {
